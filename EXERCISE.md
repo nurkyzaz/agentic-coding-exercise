@@ -27,7 +27,8 @@ tasks — just in a structured repo instead of one script.
 
 ## Your two tasks
 
-Both suit **plan mode**. Do them as two parallel agents — kick one off and work with
+Both suit **plan mode**: in OpenCode, press **Tab** to switch to the **Plan** agent
+(it asks before editing files or running commands), and Tab back to **Build** to execute. Do them as two parallel agents — kick one off and work with
 the other while it cooks.
 
 ### Task A — log results instead of printing
@@ -50,8 +51,8 @@ rule: **all defaults live in the config, none in Python.**
 ## The technique: plan mode + verify
 
 For each task:
-1. Make the agent **plan first** — don't let it one-shot.
-2. Read the plan, edit where you disagree, then let it execute.
+1. Make the agent **plan first** (Plan agent) — don't let it one-shot.
+2. Read the plan, edit where you disagree, then switch to Build and let it execute.
 3. When it's done, **read the diff** and confirm you're happy before moving on.
 
 The point: on multi-file changes with real choices (what to log, which things become
