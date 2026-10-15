@@ -42,14 +42,14 @@ the minimal version of my dotfiles: [wusche1/dotfiles @ minimal](https://github.
 ## Exercises
 
 Each exercise is a branch and adds one technique: the basic ask → edit → run → read-the-diff
-loop (00), plan mode (01), subagents (02), worktrees and `/goal` (03).
+loop (00), plan mode (01), subagents (02), worktrees and the Ralph loop (03).
 
 | Branch | Topic |
 |---|---|
 | `exercise-0` | One script — ask, edit, run, read the diff |
 | `exercise-1` | Logging & config — plan mode |
 | `exercise-2` | Monitor & schemes — subagents |
-| `exercise-3` | Best scheme & self-invented schemes — worktrees + `/goal` |
+| `exercise-3` | Best scheme & self-invented schemes — worktrees + `/ralph-loop` |
 
 Check one out and read its `EXERCISE.md`:
 
