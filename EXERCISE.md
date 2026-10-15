@@ -52,5 +52,6 @@ answers the Task-A monitor scores as low-suspicion.
 ## The technique: subagents
 
 This is work one agent would grind through serially and pollute its context with.
-Fan it out: dispatch a subagent per generation batch, collect the results, and use
+Fan it out: dispatch a subagent per generation batch (in OpenCode, mention `@general`,
+or just ask the main agent to use subagents; open their sessions with Leader+↓, then ←/→), collect the results, and use
 an adversarial reviewer subagent to check the data was actually produced correctly.
