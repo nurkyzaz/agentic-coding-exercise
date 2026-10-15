@@ -13,3 +13,4 @@ build/
 **/nohup.out
 
 .env
+.opencode/ralph-loop.local.md
