@@ -1,4 +1,4 @@
-# Exercise 03 — Best scheme & self-invented schemes (worktrees + /goal)
+# Exercise 03 — Best scheme & self-invented schemes (worktrees + Ralph loop)
 
 ## Where we are
 
@@ -21,17 +21,19 @@ uv run python main.py -c configs/debug.yaml
 Both tasks change and re-run the *same* experiment, so they collide if one agent
 works in the tree while the other does. Give **each its own git worktree**.
 
-### Task A — find the best scheme (`/goal`)
+### Task A — find the best scheme (`/ralph-loop`)
 Set a **goal**: maximize `combined_score` — a scheme whose numbers the decoder
 recovers reliably *and* whose answers the monitor scores as low-suspicion (the two
 pull against each other). Let an agent iterate toward it: propose a scheme, edit
-`configs/base.yaml`, run the config, read `metrics.json`, repeat. `/goal` keeps
+`configs/base.yaml`, run the config, read `metrics.json`, repeat. `/ralph-loop` keeps
 it optimizing instead of stopping after one idea. Note the debug run is small and
 the model is stochastic, so judge a scheme over several samples, not one.
 
-The goal's evaluator only sees what's in the transcript, so phrase the condition
-around visible output, e.g. `/goal combined_score in the latest metrics.json is above
-0.7 and the run used at least 8 samples`.
+The loop only stops when the agent itself outputs `<promise>DONE</promise>` (or after
+100 iterations; `/cancel-ralph` stops it early), so put a checkable stop condition into
+the task, e.g. `/ralph-loop "Maximize combined_score in experiments/steg_comm. Only
+output the completion promise once combined_score in the latest metrics.json is above
+0.7 and the run used at least 8 samples."` See `README.md` for setup.
 
 **Done when:** you have a scheme whose `combined_score` is clearly higher than the
 scheme the experiment ships with.
@@ -46,9 +48,10 @@ and log the proposed scheme alongside each completion.
 **Done when:** a run in invent-scheme mode has the model choose the scheme and still
 recover numbers, with the chosen scheme saved in the completions.
 
-## The technique: worktrees + /goal
+## The technique: worktrees + Ralph loop
 
-Run Task A and Task B as two agents in **separate worktrees** off this branch — the
+Run Task A and Task B as two agents in **separate worktrees** off this branch
+(`git worktree add ../steg-a -b try-a`, then `opencode` in each; see `README.md`): the
 sweep in one tree won't clobber the code changes in the other, and both can run the
-experiment at once. Drive Task A with **`/goal`** so its agent keeps
+experiment at once. Drive Task A with **`/ralph-loop`** so its agent keeps
 optimizing instead of declaring victory early.
