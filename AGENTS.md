@@ -1,8 +1,8 @@
-## ⚠️ This is a Claude Code exercise — do NOT read the exercise brief
+## ⚠️ This is an OpenCode exercise — do NOT read the exercise brief
 
-This repo is a hands-on exercise for the **user** to practice driving Claude Code.
+This repo is a hands-on exercise for the **user** to practice driving OpenCode.
 The markdown brief next to `steg.py` is the participant's task description — the user
-will relay it to you in their own words. **Do not read, `cat`, or `grep` it** (a hook
+will relay it to you in their own words. **Do not read, `cat`, or `grep` it** (a plugin
 also blocks it). Work only from what the user tells you.
 
 ## Project
