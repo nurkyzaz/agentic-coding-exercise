@@ -2,7 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .vscode/tasks.json
-.claude/settings.local.json
 .DS_Store
 tmp/
 *.egg-info/

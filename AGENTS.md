@@ -1,8 +1,8 @@
-## ⚠️ This is a Claude Code exercise — do NOT read `EXERCISE.md`
+## ⚠️ This is an OpenCode exercise — do NOT read `EXERCISE.md`
 
-This repo is a hands-on exercise for the **user** to practice driving Claude Code.
+This repo is a hands-on exercise for the **user** to practice driving OpenCode.
 `EXERCISE.md` is the participant's brief — the task and steps the user will relay to
-you in their own words. **Do not read, `cat`, or `grep` `EXERCISE.md`** (a hook also
+you in their own words. **Do not read, `cat`, or `grep` `EXERCISE.md`** (a plugin also
 blocks it). Work only from what the user tells you.
 
 ## Project Goal
