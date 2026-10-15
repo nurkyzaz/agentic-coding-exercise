@@ -21,10 +21,10 @@ uv run python steg.py
 
 ## Step 1 — Get oriented
 
-Start `claude` in this folder and ask it what `steg.py` does.
+Start `opencode` in this folder and ask it what `steg.py` does.
 
 Then **write a three-line summary in your own words**, and check every claim against
-the file. If Claude says something you can't find in the code, ask it to point to the
+the file. If the agent says something you can't find in the code, ask it to point to the
 line. The rule for this whole course: don't accept an explanation you can't verify.
 
 ## Step 2 — Run it
@@ -35,7 +35,7 @@ numbers back? What's the accuracy at the bottom?
 ## Task A — log results instead of printing
 
 Right now the run just `print()`s everything and is gone when the terminal scrolls.
-Have Claude make it write results to disk: a folder per run (e.g.
+Have the agent make it write results to disk: a folder per run (e.g.
 `results/<timestamp>/`) containing a `completions.jsonl` (one row per sample: main
 task, values, answer, decoded, correctness) and a `metrics.json` summary. A short
 printed summary is fine, but the durable record belongs on disk.
@@ -53,7 +53,7 @@ the terminal:
 uv run python steg.py --config configs/base.yaml
 ```
 
-Claude will need to add a YAML library; let it do so with `uv add`, not by editing
+The agent will need to add a YAML library; let it do so with `uv add`, not by editing
 `pyproject.toml`.
 
 **Done when:** changing a prompt or setting only means editing the YAML, and
@@ -65,9 +65,9 @@ Claude will need to add a YAML library; let it do so with `uv add`, not by editi
 For every task:
 
 1. Describe what you want in plain words. Say what "done" looks like.
-2. Before accepting a change, **read the diff** (`git diff`, or the diff Claude shows
+2. Before accepting a change, **read the diff** (`git diff`, or the diff the agent shows
    you). Make sure you understand each change. Ask about anything you don't.
-3. Run it. If it's wrong, tell Claude *what happened* (paste the output) rather than
+3. Run it. If it's wrong, tell the agent *what happened* (paste the output) rather than
    fixing it by hand.
 4. Commit when it works, so the next task starts from a clean diff.
 
