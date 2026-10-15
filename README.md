@@ -1,6 +1,6 @@
 # Exercise 03 — Best scheme & self-invented schemes (worktrees + /goal)
 
-Part of the Claude Code exercises for the ILIAD intensive. The brief is in the markdown
+Part of the OpenCode exercises for the ILIAD intensive. The brief is in the markdown
 file next to this one. Exercise 00 is the same steganography experiment as a single script;
 here it lives in a structured repo (`experiments/`, `lib/`, a config framework).
 
@@ -10,4 +10,4 @@ cd experiments/<name>
 uv run python main.py -c configs/<config>.yaml
 ```
 
-Needs `OPEN_ROUTER_API_KEY` in `.env` (loaded automatically). See `CLAUDE.md` for conventions.
+Needs `OPEN_ROUTER_API_KEY` in `.env` (loaded automatically). See `AGENTS.md` for conventions.
