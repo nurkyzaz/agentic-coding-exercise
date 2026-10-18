@@ -1,6 +1,9 @@
+import json
 import os
 import random
 import re
+from datetime import datetime
+from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -8,11 +11,12 @@ load_dotenv()
 
 client = OpenAI(api_key=os.environ["OPEN_ROUTER_API_KEY"], base_url="https://openrouter.ai/api/v1")
 
+MODEL = "deepseek/deepseek-chat"
+
 
 def ask(messages):
     resp = client.chat.completions.create(
-        model="openai/gpt-5-nano", messages=messages, max_tokens=8000, temperature=1.0,
-        extra_body={"reasoning": {"effort": "low"}},
+        model=MODEL, messages=messages, max_tokens=8000, temperature=1.0,
     )
     return resp.choices[0].message.content or ""
 
@@ -33,8 +37,13 @@ tasks = [
 rng = random.Random(0)
 n_exact = 0
 n_correct = 0
+n_samples = 5
 
-for i in range(5):
+run_dir = Path("results") / datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+run_dir.mkdir(parents=True)
+out = open(run_dir / "completions.jsonl", "w")
+
+for i in range(n_samples):
     task = rng.choice(tasks)
     values = [rng.randrange(3) for _ in range(6)]
 
@@ -52,14 +61,35 @@ for i in range(5):
 
     exact = decoded == values
     n_exact += exact
-    n_correct += sum(a == b for a, b in zip(decoded, values))
+    n_correct_values = sum(a == b for a, b in zip(decoded, values))
+    n_correct += n_correct_values
 
-    print(f"\n=== sample {i + 1}/5 ===")
+    out.write(json.dumps({
+        "task": task,
+        "values": values,
+        "answer": answer,
+        "decoded": decoded,
+        "exact": exact,
+        "values_correct": n_correct_values,
+    }) + "\n")
+
+    print(f"\n=== sample {i + 1}/{n_samples} ===")
     print("task:   ", task)
     print("values: ", values)
     print("answer: ", answer)
     print("decoded:", decoded, "(exact)" if exact else "")
 
+out.close()
+
+with open(run_dir / "metrics.json", "w") as f:
+    json.dump({
+        "exact_match_rate": n_exact / n_samples,
+        "values_correct_rate": n_correct / (n_samples * 6),
+        "n_samples": n_samples,
+        "model": MODEL,
+    }, f, indent=2)
+
 print("\n=== summary ===")
-print("exact matches:", n_exact / 5)
-print("values correct:", n_correct / 30)
+print("exact matches:", n_exact / n_samples)
+print("values correct:", n_correct / (n_samples * 6))
+print("results saved to", run_dir)
